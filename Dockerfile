@@ -4,12 +4,11 @@ USER root
 
 # Instalar Docker CLI dentro del contenedor (para CI con Docker)
 RUN apt-get update && \
-    apt-get install -y lsb-release gnupg2 curl && \
-    curl -fsSLo /usr/share/keyrings/docker-archive-keyring.asc https://download.docker.com/linux/debian/gpg && \
-    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.asc] https://download.docker.com/linux/debian $(lsb_release -cs) stable" > /etc/apt/sources.list.d/docker.list && \
-    apt-get update && \
-    apt-get install -y docker-ce-cli && \
-    rm -rf /var/lib/apt/lists/*
+    apt-get install -y docker.io docker-compose-plugin
+
+# Agregar al usuario jenkins al grupo docker (ver siguiente paso)
+RUN groupadd -g 999 docker || true
+RUN usermod -aG docker jenkins
 
 # Volver al usuario jenkins
 USER jenkins
