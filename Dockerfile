@@ -7,8 +7,9 @@ RUN apt-get update && apt-get install -y \
     git \
     && rm -rf /var/lib/apt/lists/*
 
-USER jenkins
+RUN usermod -a -G docker jenkins
 
+USER jenkins
 
 # Instalar plugins
 COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
