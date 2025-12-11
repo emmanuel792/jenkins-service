@@ -4,8 +4,7 @@ USER root
 
 # Instalar Docker CLI dentro del contenedor (para CI con Docker)
 RUN apt-get update && \
-    apt-get install -y docker.io && \
-    apt-get clean
+    apt-get install -y docker.io docker-compose-plugin
 
 # Volver al usuario jenkins
 USER jenkins
