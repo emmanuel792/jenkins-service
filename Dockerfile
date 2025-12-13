@@ -4,7 +4,8 @@ USER root
 
 # Instalar Docker CLI dentro del contenedor (para CI con Docker)
 RUN apt-get update && \
-    apt-get install -y docker.io docker-compose-plugin
+    apt-get install -y docker.io docker-compose-plugin && \
+    rm -rf /var/lib/apt/lists/*
 
 # Agregar al usuario jenkins al grupo docker (ver siguiente paso)
 RUN groupadd -g 999 docker || true
